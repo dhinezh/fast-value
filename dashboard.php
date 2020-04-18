@@ -67,25 +67,25 @@
                         <h2 class="mb-5">Choose the type of vehicle</h2>
                         <div class="row button-wrapper">
                             <div class="col-12 col-md-6 col-xl-3">
-                                <a href="./add-entry.php" class="btn-medium waves-effect waves-light btn redirect-btn blue">
+                                <a href="./four-wheeler-entry.php" class="btn-medium waves-effect waves-light btn redirect-btn blue">
                                     <i class="material-icons">directions_car</i>
                                     <p>Four wheeler</p>
                                 </a>
                             </div>
                             <div class="col-12 col-md-6 col-xl-3">
-                                <a href="./add-entry.php" class="btn-medium waves-effect waves-light btn redirect-btn blue">
+                                <a href="" class="btn-medium waves-effect waves-light btn redirect-btn blue">
                                     <i class="material-icons">two_wheeler</i>
                                     <p>Two wheeler</p>
                                 </a>
                             </div>
                             <div class="col-12 col-md-6 col-xl-3">
-                                <a href="./add-entry.php" class="btn-medium waves-effect waves-light btn redirect-btn blue">
+                                <a href="./CV-entry.php" class="btn-medium waves-effect waves-light btn redirect-btn blue">
                                     <i class="material-icons">directions_bus</i>
                                     <p>CV</p>
                                 </a>
                             </div>
                             <div class="col-12 col-md-6 col-xl-3">
-                                <a href="./add-entry.php" class="btn-medium waves-effect waves-light btn redirect-btn blue">
+                                <a href="" class="btn-medium waves-effect waves-light btn redirect-btn blue">
                                     <i class="material-icons">ev_station</i>
                                     <p>FE</p>
                                 </a>

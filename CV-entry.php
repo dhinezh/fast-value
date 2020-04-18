@@ -64,8 +64,8 @@
             <div class="container pt-5">
                 <div class="card">
                     <div class="card-content">
-                        <form id="vehicle-entry-form" name="vehicle-entry-form" action='' method="post" enctype="multipart/form-data">
-                            <div id="four-wheeler-entry-form" class="form-register">
+                        <form id="CV-entry-form" name="CV-entry-form" action='' method="post" enctype="multipart/form-data">
+                            <div class="form-register">
                                 <!-- SECTION 1 -->
                                 <h3><span class="step-icon">01</span></h3>
                                 <section>
@@ -73,72 +73,72 @@
                                     <div class="row button-wrapper">
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <input type="text" class="validate" id="repId" name="repId">
+                                                <input type="text" class="validate required" id="repId" name="repId">
                                                 <label for="repId">Rep ID</label>
-                                                <span class="helper-text" id='vehicle-entry-form_repId_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_repId_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="datepicker" id="inspectionData" name="inspectionData">
                                                 <label for="inspectionData">Inspection date</label>
-                                                <span class="helper-text" id='vehicle-entry-form_inspectionData_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_inspectionData_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <input type="text" class="validate" id="loanNo" name="loanNo">
+                                                <input type="text" class="validate required" id="loanNo" name="loanNo">
                                                 <label for="loanNo">Loan No</label>
-                                                <span class="helper-text" id='vehicle-entry-form_loanNo_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_loanNo_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="location" name="location">
                                                 <label for="location">Location</label>
-                                                <span class="helper-text" id='vehicle-entry-form_location_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_location_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <input type="text" class="validate" id="vehicleMake" name="vehicleMake">
+                                                <input type="text" class="validate required" id="vehicleMake" name="vehicleMake">
                                                 <label for="vehicleMake">Make</label>
-                                                <span class="helper-text" id='vehicle-entry-form_vehicleMake_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_vehicleMake_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <input type="text" class="validate" id="vehicleModel" name="vehicleModel">
+                                                <input type="text" class="validate required" id="vehicleModel" name="vehicleModel">
                                                 <label for="vehicleModel">Model</label>
-                                                <span class="helper-text" id='vehicle-entry-form_vehicleModel_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_vehicleModel_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <input type="text" class="validate" id="vehicleVariant" name="vehicleVariant">
+                                                <input type="text" class="validate required" id="vehicleVariant" name="vehicleVariant">
                                                 <label for="vehicleVariant">Variant</label>
-                                                <span class="helper-text" id='vehicle-entry-form_vehicleVariant_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_vehicleVariant_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="vehicleRegNo" name="vehicleRegNo">
                                                 <label for="vehicleRegNo">Registration No</label>
-                                                <span class="helper-text" id='vehicle-entry-form_vehicleRegNo_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_vehicleRegNo_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="datepicker" id="vehicleRegDate" name="vehicleRegDate">
                                                 <label for="vehicleRegDate">Registration date</label>
-                                                <span class="helper-text" id='vehicle-entry-form_vehicleRegDate_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_vehicleRegDate_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="ownerName" name="ownerName">
                                                 <label for="ownerName">Owner Name</label>
-                                                <span class="helper-text" id='vehicle-entry-form_ownerName_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_ownerName_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
@@ -154,7 +154,7 @@
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="manufacturedYear" name="manufacturedYear">
                                                 <label for="manufacturedYear">Manufactured Year</label>
-                                                <span class="helper-text" id='vehicle-entry-form_manufacturedYear_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_manufacturedYear_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
@@ -170,14 +170,14 @@
                                             <div class="input-field">
                                                 <input type="text" class="datepicker" id="vehicleInsuranceDate" name="vehicleInsuranceDate">
                                                 <label for="vehicleInsuranceDate">Insurance Date</label>
-                                                <span class="helper-text" id='vehicle-entry-form_vehicleInsuranceDate_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_vehicleInsuranceDate_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="odometerReading" name="odometerReading">
                                                 <label for="odometerReading">Odometer Reading</label>
-                                                <span class="helper-text" id='vehicle-entry-form_odometerReading_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_odometerReading_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
@@ -205,14 +205,14 @@
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="hpaStatus" name="hpaStatus">
                                                 <label for="hpaStatus">HPA Status</label>
-                                                <span class="helper-text" id='vehicle-entry-form_hpaStatus_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_hpaStatus_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="hpaBank" name="hpaBank">
                                                 <label for="hpaBank">HPA Bank</label>
-                                                <span class="helper-text" id='vehicle-entry-form_hpaBank_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_hpaBank_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
@@ -239,7 +239,7 @@
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="vehicleColor" name="vehicleColor">
                                                 <label for="vehicleColor">Color</label>
-                                                <span class="helper-text" id='vehicle-entry-form_vehicleColor_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_vehicleColor_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
@@ -315,14 +315,14 @@
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="reportRequestedBy" name="reportRequestedBy">
                                                 <label for="reportRequestedBy">Report Requested By</label>
-                                                <span class="helper-text" id='vehicle-entry-form_reportRequestedBy_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_reportRequestedBy_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="valuationPrice" name="valuationPrice">
                                                 <label for="valuationPrice">Valuation Price</label>
-                                                <span class="helper-text" id='vehicle-entry-form_valuationPrice_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_valuationPrice_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -333,7 +333,6 @@
                                         </div>
                                     </div>
                                 </section>
-
                                 <!-- SECTION 2 -->
                                 <h3><span class="step-icon">02</span></h3>
                                 <section>
@@ -343,84 +342,84 @@
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="ownerName" name="ownerName">
                                                 <label for="ownerName">Owner Name</label>
-                                                <span class="helper-text" id='vehicle-entry-form_ownerName_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_ownerName_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="parivahanMaker" name="parivahanMaker">
                                                 <label for="parivahanMaker">Maker</label>
-                                                <span class="helper-text" id='vehicle-entry-form_parivahanMaker_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_parivahanMaker_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="parivahanModel" name="parivahanModel">
                                                 <label for="parivahanModel">Model</label>
-                                                <span class="helper-text" id='vehicle-entry-form_parivahanModel_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_parivahanModel_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="parivahanManufacturedYear" name="parivahanManufacturedYear">
                                                 <label for="parivahanManufacturedYear">Manufactured Year</label>
-                                                <span class="helper-text" id='vehicle-entry-form_parivahanManufacturedYear_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_parivahanManufacturedYear_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="datepicker" id="parivahanRegDate" name="parivahanRegDate">
                                                 <label for="parivahanRegDate">Registration date</label>
-                                                <span class="helper-text" id='vehicle-entry-form_parivahanRegDate_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_parivahanRegDate_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="vehicleCategory" name="vehicleCategory">
                                                 <label for="vehicleCategory">Vehicle Category</label>
-                                                <span class="helper-text" id='vehicle-entry-form_vehicleCategory_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_vehicleCategory_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="engineNumber" name="engineNumber">
                                                 <label for="engineNumber">Engine Number</label>
-                                                <span class="helper-text" id='vehicle-entry-form_engineNumber_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_engineNumber_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="chassisNumber" name="chassisNumber">
                                                 <label for="chassisNumber">Chassis Number</label>
-                                                <span class="helper-text" id='vehicle-entry-form_chassisNumber_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_chassisNumber_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="bodyType" name="bodyType">
                                                 <label for="bodyType">Body Type</label>
-                                                <span class="helper-text" id='vehicle-entry-form_bodyType_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_bodyType_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="ladenWeight" name="ladenWeight">
                                                 <label for="ladenWeight">Laden Weight</label>
-                                                <span class="helper-text" id='vehicle-entry-form_ladenWeight_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_ladenWeight_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="unladenWeight" name="unladenWeight">
                                                 <label for="unladenWeight">Unladen Weight</label>
-                                                <span class="helper-text" id='vehicle-entry-form_unladenWeight_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_unladenWeight_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="sleeperCapacity" name="sleeperCapacity">
                                                 <label for="sleeperCapacity">Sleeper Capacity</label>
-                                                <span class="helper-text" id='vehicle-entry-form_sleeperCapacity_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_sleeperCapacity_errorloc'></span>
                                             </div>
                                         </div>
                                         <h2 class="col-12">Insurance Details</h2>
@@ -428,35 +427,35 @@
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="insuranceType" name="insuranceType">
                                                 <label for="insuranceType">Insurance Type</label>
-                                                <span class="helper-text" id='vehicle-entry-form_insuranceType_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_insuranceType_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="insuranceCompany" name="insuranceCompany">
                                                 <label for="insuranceCompany">Insurance Company</label>
-                                                <span class="helper-text" id='vehicle-entry-form_insuranceCompany_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_insuranceCompany_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="datepicker" id="insuranceFrom" name="insuranceFrom">
                                                 <label for="insuranceFrom">Insurance From</label>
-                                                <span class="helper-text" id='vehicle-entry-form_insuranceFrom_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_insuranceFrom_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="datepicker" id="InsuranceUpTo" name="InsuranceUpTo">
                                                 <label for="InsuranceUpTo">Insurance UpTo</label>
-                                                <span class="helper-text" id='vehicle-entry-form_InsuranceUpTo_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_InsuranceUpTo_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="insuranceValue" name="insuranceValue">
                                                 <label for="insuranceValue">Insurance Declared Value</label>
-                                                <span class="helper-text" id='vehicle-entry-form_insuranceValue_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_insuranceValue_errorloc'></span>
                                             </div>
                                         </div>
                                         <h2 class="col-12">Tax Details</h2>
@@ -464,28 +463,28 @@
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="taxAmount" name="taxAmount">
                                                 <label for="taxAmount">Tax Amount</label>
-                                                <span class="helper-text" id='vehicle-entry-form_taxAmount_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_taxAmount_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="datepicker" id="taxRecipientDate" name="taxRecipientDate">
                                                 <label for="taxRecipientDate">Tax Receipient Date</label>
-                                                <span class="helper-text" id='vehicle-entry-form_taxRecipientDate_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_taxRecipientDate_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="taxUpTo" name="taxUpTo">
                                                 <label for="taxUpTo">Tax UpTo</label>
-                                                <span class="helper-text" id='vehicle-entry-form_taxUpTo_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_taxUpTo_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <input type="text" class="validate" id="taxClearUpTo" name="taxClearUpTo">
                                                 <label for="taxClearUpTo">Tax Clear Upto</label>
-                                                <span class="helper-text" id='vehicle-entry-form_taxClearUpTo_errorloc'></span>
+                                                <span class="helper-text" id='CV-entry-form_taxClearUpTo_errorloc'></span>
                                             </div>
                                         </div>
                                     </div>
@@ -567,25 +566,237 @@
                                                 <label for="TDBreaking">Breaking Condition</label>
                                             </div>
                                         </div>
-                                    </div>
-                                </section>
-                                <!-- SECTION 4 -->
-                                <h3><span class="step-icon">04</span></h3>
-                                <section>
-                                    <div class="row button-wrapper">
-                                        <h2 class="col-12">Exterior Conditions</h2>
+                                        <h2 class="col-12">Cabin Condition</h2>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <select name="ExCGrill" id="ExCGrill">
+                                                <select name="CabinFrontBumper" id="CabinFrontBumper">
                                                     <option value="5" selected>Very Good</option>
                                                     <option value="4">Good</option>
                                                     <option value="3">Average</option>
                                                     <option value="2">Bad</option>
                                                     <option value="1">Not Available</option>
                                                 </select>
-                                                <label for="ExCGrill">Grill</label>
+                                                <label for="CabinFrontBumper">Front Bumper</label>
                                             </div>
                                         </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="CabinRearBumper" id="CabinRearBumper">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="CabinRearBumper">Rear Bumper</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="CabinRightDoor" id="CabinRightDoor">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="CabinRightDoor">Right Door</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="CabinLeftDoor" id="CabinLeftDoor">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="CabinLeftDoor">Left Door</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="CabinDashboardCondition" id="CabinDashboardCondition">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="CabinDashboardCondition">Dashboard Condition</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="CabinDriverSeat" id="CabinDriverSeat">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="CabinDriverSeat">Driver Seat Condition</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="CabinCoDriverSeat" id="CabinCoDriverSeat">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="CabinCoDriverSeat">Co-Driver Seat Condition</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="CabinThirdRow" id="CabinThirdRow">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="CabinThirdRow">Third Row Seat Condition</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="CabinABS" id="CabinABS">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="CabinABS">ABS Condition</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="CabinRadiator" id="CabinRadiator">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="CabinRadiator">Radiator Condition</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <!-- SECTION 4 -->
+                                <h3><span class="step-icon">04</span></h3>
+                                <section>
+                                    <div class="row button-wrapper">
+                                        <h2 class="col-12">Vehicle Body Details</h2>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="LBType" id="LBType">
+                                                    <option value="companyBody" selected>Company body</option>
+                                                    <option value="normalBody">Normal body</option>
+                                                    <option value="localBody">Local body</option>
+                                                </select>
+                                                <label for="LBType">Load body type</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="LBBuild" id="LBBuild">
+                                                    <option value="highSideDeck" selected>High side deck</option>
+                                                    <option value="fixedSideDeck">Fixed side deck</option>
+                                                    <option value="dropSideDeck">Drop side deck</option>
+                                                    <option value="halfDeckLoad">Half deck load</option>
+                                                    <option value="flatDeckTrailer">Flat deck trailer</option>
+                                                    <option value="cabinChassisDeck">Cabin chassis deck</option>
+                                                    <option value="fullyBuilt">Fully built</option>
+                                                </select>
+                                                <label for="LBBuild">Load Body Build</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="LBLeftSideGate" id="LBLeftSideGate">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="LBLeftSideGate">Left Side Gate</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="LBRightSideGate" id="LBRightSideGate">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="LBRightSideGate">Right Side Gate</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="LBLoadFloor" id="LBLoadFloor">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="LBLoadFloor">Load Floor</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="LBOverallLoadBody" id="LBOverallLoadBody">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="LBOverallLoadBody">Overall Load Body</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="LBBodyPaint" id="LBBodyPaint">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="LBBodyPaint">Body Paint</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="LBFuelTank" id="LBFuelTank">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="LBFuelTank">Fuel Tank</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <!-- SECTION 5 -->
+                                <h3><span class="step-icon">05</span></h3>
+                                <section>
+                                    <div class="row button-wrapper">
+                                        <h2 class="col-12">Exterior Conditions</h2>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ExCHeadLight" id="ExCHeadLight">
@@ -600,6 +811,15 @@
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
+                                                <select name="ExCRearTailLight" id="ExCRearTailLight">
+                                                    <option value="working" selected>Working</option>
+                                                    <option value="notWorking">Not Working</option>
+                                                </select>
+                                                <label for="ExCRearTailLight">Rear Tail Light</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
                                                 <select name="ExCHood" id="ExCHood">
                                                     <option value="5" selected>Very Good</option>
                                                     <option value="4">Good</option>
@@ -608,18 +828,6 @@
                                                     <option value="1">Not Available</option>
                                                 </select>
                                                 <label for="ExCHood">Hood</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="ExCFrontBumper" id="ExCFrontBumper">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="ExCFrontBumper">Front Bumper</label>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
@@ -648,385 +856,32 @@
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <select name="ExCLeftQuarter" id="ExCLeftQuarter">
+                                                <select name="ExCWindshield" id="ExCWindshield">
                                                     <option value="5" selected>Very Good</option>
                                                     <option value="4">Good</option>
                                                     <option value="3">Average</option>
                                                     <option value="2">Bad</option>
                                                     <option value="1">Not Available</option>
                                                 </select>
-                                                <label for="ExCLeftQuarter">Left Quarter</label>
+                                                <label for="ExCWindshield">Windshield</label>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <select name="ExCRightQuarter" id="ExCRightQuarter">
+                                                <select name="ExCChassisCondition" id="ExCChassisCondition">
                                                     <option value="5" selected>Very Good</option>
                                                     <option value="4">Good</option>
                                                     <option value="3">Average</option>
                                                     <option value="2">Bad</option>
                                                     <option value="1">Not Available</option>
                                                 </select>
-                                                <label for="ExCRightQuarter">Right Quarter</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="ExCFrontWindshield" id="ExCFrontWindshield">
-                                                    <option value="original" selected>Original</option>
-                                                    <option value="duplicate">Duplicate</option>
-                                                </select>
-                                                <label for="ExCFrontWindshield">Front Windshield</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="ExCRightFrontDoor" id="ExCRightFrontDoor">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="ExCRightFrontDoor">Right Front Door</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="ExCLeftFrontDoor" id="ExCLeftFrontDoor">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="ExCLeftFrontDoor">Left Front Door</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="ExCRightRearDoor" id="ExCRightRearDoor">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="ExCRightRearDoor">Right Rear Door</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="ExCLeftRearDoor" id="ExCLeftRearDoor">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="ExCLeftRearDoor">Left Rear Door</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="ExCRoof" id="ExCRoof">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="ExCRoof">Roof</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="ExCRearWindShield" id="ExCRearWindShield">
-                                                    <option value="original" selected>Original</option>
-                                                    <option value="duplicate">Duplicate</option>
-                                                </select>
-                                                <label for="ExCRearWindShield">Rear Windshield</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="ExCRearTailLight" id="ExCRearTailLight">
-                                                    <option value="working" selected>Working</option>
-                                                    <option value="notWorking">Not Working</option>
-                                                </select>
-                                                <label for="ExCRearTailLight">Rear Tail Light</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="ExCRearBumper" id="ExCRearBumper">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="ExCRearBumper">Rear Bumper</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="ExCBodyPaint" id="ExCBodyPaint">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="ExCBodyPaint">Body Paint</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="ExCDeckLid" id="ExCDeckLid">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="ExCDeckLid">Deck LID</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
-                                <!-- SECTION 5 -->
-                                <h3><span class="step-icon">05</span></h3>
-                                <section>
-                                    <div class="row button-wrapper">
-                                        <h2 class="col-12">Interior Conditions</h2>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="InTDashboardCondition" id="InTDashboardCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="InTDashboardCondition">Dashboard Condition</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="InTFrontLeftSeat" id="InTFrontLeftSeat">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="InTFrontLeftSeat">Front Left Seat</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="InTFrontRightSeat" id="InTFrontRightSeat">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="InTFrontRightSeat">Front Right Seat</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="InTRearLeftSeat" id="InTRearLeftSeat">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="InTRearLeftSeat">Rear Left Seat</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="InTRearRightSeat" id="InTRearRightSeat">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="InTRearRightSeat">Rear Right Seat</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="InTThirdRowSeatCondition" id="InTThirdRowSeatCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="InTThirdRowSeatCondition">Third Row Seat Condition</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="InTTrunkCargo" id="InTTrunkCargo">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="InTTrunkCargo">Trunk Cargo Condition</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="InTCruiseControl" id="InTCruiseControl">
-                                                    <option value="available" selected>Available</option>
-                                                    <option value="notAvailable">Not Available</option>
-                                                </select>
-                                                <label for="InTCruiseControl">Cruise Control</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="InTAirbags" id="InTAirbags">
-                                                    <option value="available" selected>Available</option>
-                                                    <option value="notAvailable">Not Available</option>
-                                                </select>
-                                                <label for="InTAirbags">Air Bag</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="InTPowerWindow" id="InTPowerWindow">
-                                                    <option value="available" selected>Available</option>
-                                                    <option value="notAvailable">Not Available</option>
-                                                </select>
-                                                <label for="InTPowerWindow">Power Window</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="InTCarpetNFloorMat" id="InTCarpetNFloorMat">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="InTCarpetNFloorMat">Carpet & Floor mats</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="IntOdometerCondition" id="IntOdometerCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="IntOdometerCondition">Odometer Condition</label>
+                                                <label for="ExCChassisCondition">Chassis Condition</label>
                                             </div>
                                         </div>
                                     </div>
                                 </section>
                                 <!-- SECTION 6 -->
                                 <h3><span class="step-icon">06</span></h3>
-                                <section>
-                                    <div class="row button-wrapper">
-                                        <h2 class="col-12">Vehicle Condition</h2>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="VCRunningCondition" id="VCRunningCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="VCRunningCondition">Running Condition</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="VCEngineStart" id="VCEngineStart">
-                                                    <option value="starts" selected>Starts</option>
-                                                    <option value="doesntstart">Does not start</option>
-                                                </select>
-                                                <label for="VCEngineStart">Engine Start</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="VCTransmissionCondition" id="VCTransmissionCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="VCTransmissionCondition">Transmission / Gear Box Condition</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="VCTransmissionWorking" id="VCTransmissionWorking">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="VCTransmissionWorking">Transmission Working </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="VCGearShift" id="VCGearShift">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="VCGearShift">Gear Shift</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="VCFrontSuspension" id="VCFrontSuspension">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="VCFrontSuspension">Front Suspension</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-3">
-                                            <div class="input-field">
-                                                <select name="VCRearSuspension" id="VCRearSuspension">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
-                                                </select>
-                                                <label for="VCRearSuspension">Rear Suspension</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
-                                <!-- SECTION 7 -->
-                                <h3><span class="step-icon">07</span></h3>
                                 <section>
                                     <div class="row button-wrapper">
                                         <h2 class="col-12">Electrical Functions</h2>
@@ -1081,6 +936,30 @@
                                         <h2 class="col-12">HVAC/Cooling</h2>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
+                                                <select name="ECACRefrigrationUnit" id="ECACRefrigrationUnit">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="ECACRefrigrationUnit">Refrigration Unit Fitted In  Load Vehicle</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="ECACHvacCooling" id="ECACHvacCooling">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="ECACHvacCooling">HVAC Cooling</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
                                                 <select name="ECACHeaterBlowerFan" id="ECACHeaterBlowerFan">
                                                     <option value="5" selected>Very Good</option>
                                                     <option value="4">Good</option>
@@ -1117,8 +996,8 @@
                                         </div>
                                     </div>
                                 </section>
-                                <!-- SECTION 8 -->
-                                <h3><span class="step-icon">08</span></h3>
+                                <!-- SECTION 7 -->
+                                <h3><span class="step-icon">07</span></h3>
                                 <section>
                                     <div class="row button-wrapper">
                                         <h2 class="col-12">Stearing Conditions</h2>
@@ -1163,8 +1042,8 @@
                                         </div>
                                     </div>
                                 </section>
-                                <!-- SECTION 9 -->
-                                <h3><span class="step-icon">09</span></h3>
+                                <!-- SECTION 8 -->
+                                <h3><span class="step-icon">08</span></h3>
                                 <section>
                                     <div class="row button-wrapper">
                                         <h2 class="col-12">Mechanical Conditions</h2>
@@ -1215,6 +1094,61 @@
                                         </div>
                                     </div>
                                 </section>
+                                <!-- SECTION 9 -->
+                                <h3><span class="step-icon">09</span></h3>
+                                <section>
+                                    <div class="row button-wrapper">
+                                        <h2 class="col-12">Transmission Conditions</h2>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="TCTransmissionCondition" id="TCTransmissionCondition">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="TCTransmissionCondition">Transmission / Gear Box Condition</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="TCTransmissionWorking" id="TCTransmissionWorking">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="TCTransmissionWorking">Transmission Working </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="TCFrontSuspension" id="TCFrontSuspension">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="TCFrontSuspension">Front Suspension</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="TCRearSuspension" id="TCRearSuspension">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="TCRearSuspension">Rear Suspension</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
                                 <!-- SECTION 10 -->
                                 <h3><span class="step-icon">10</span></h3>
                                 <section>
@@ -1222,104 +1156,339 @@
                                         <h2 class="col-12">Tyre Conditions</h2>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <select name="TCNoOfTyres" id="TCNoOfTyres">
-                                                    <option value="5" selected>5</option>
-                                                    <option value="4">4</option>
-                                                    <option value="3">3</option>
-                                                    <option value="2">2</option>
-                                                    <option value="1">1</option>
-                                                </select>
-                                                <label for="TCNoOfTyres">No Of Tyres</label>
+                                                <input type="text" class="validate required" id="TCNofTyres" name="TCNofTyres">
+                                                <label for="TCNofTyres">No of Tyres</label>
+                                                <span class="helper-text" id='CV-entry-form_TCNofTyres_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <select name="TCFrontRightWheelType" id="TCFrontRightWheelType">
-                                                    <option value="rim" selected>Rim</option>
-                                                    <option value="alloy">Alloy</option>
+                                                <select name="TCFrontLeftTyresCondition" id="TCFrontLeftTyresCondition">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
                                                 </select>
-                                                <label for="TCFrontRightWheelType">Front Right Wheel Type</label>
+                                                <label for="TCFrontLeftTyresCondition">Front Left Tyres Condition</label>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <select name="TCFrontLeftWheelType" id="TCFrontLeftWheelType">
-                                                    <option value="rim" selected>Rim</option>
-                                                    <option value="alloy">Alloy</option>
+                                                <select name="TCFrontRightTyresCondition" id="TCFrontRightTyresCondition">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
                                                 </select>
-                                                <label for="TCFrontLeftWheelType">Front Left Wheel Type</label>
+                                                <label for="TCFrontRightTyresCondition">Front Right Tyres Condition</label>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <select name="TCRearRightWheelType" id="TCRearRightWheelType">
-                                                    <option value="rim" selected>Rim</option>
-                                                    <option value="alloy">Alloy</option>
+                                                <select name="TCRearLeftTyresCondition" id="TCRearLeftTyresCondition">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
                                                 </select>
-                                                <label for="TCRearRightWheelType">Rear Right Wheel Type</label>
+                                                <label for="TCRearLeftTyresCondition">Rear Left Tyres Condition</label>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <select name="TCRearLeftWheelType" id="TCRearLeftWheelType">
-                                                    <option value="rim" selected>Rim</option>
-                                                    <option value="alloy">Alloy</option>
+                                                <select name="TCRearRightTyresCondition" id="TCRearRightTyresCondition">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
                                                 </select>
-                                                <label for="TCRearLeftWheelType">Rear Left Wheel Type</label>
+                                                <label for="TCRearRightTyresCondition">Rear Right Tyres Condition</label>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <select name="TCSpareWheelType" id="TCSpareWheelType">
-                                                    <option value="rim" selected>Rim</option>
-                                                    <option value="alloy">Alloy</option>
+                                                <select name="TCSpareTyresCondition" id="TCSpareTyresCondition">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
                                                 </select>
-                                                <label for="TCSpareWheelType">Spare Wheel Type</label>
+                                                <label for="TCSpareTyresCondition">Spare Tyres Condition</label>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <select name="TCFrontLeftWheel" id="TCFrontLeftWheel">
-                                                    <option value="available" selected>Available</option>
+                                                <select name="TCTyre5Condition" id="TCTyre5Condition">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="TCTyre5Condition">Tyre 5 Condition</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="TCTyre6Condition" id="TCTyre6Condition">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="TCTyre6Condition">Tyre 6 Condition</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="TCTyre7Condition" id="TCTyre7Condition">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="TCTyre7Condition">Tyre 7 Condition</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="TCTyre8Condition" id="TCTyre8Condition">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="TCTyre8Condition">Tyre 8 Condition</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="TCTyre9Condition" id="TCTyre9Condition">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="TCTyre9Condition">Tyre 9 Condition</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="TCTyre10Condition" id="TCTyre10Condition">
+                                                    <option value="5" selected>Very Good</option>
+                                                    <option value="4">Good</option>
+                                                    <option value="3">Average</option>
+                                                    <option value="2">Bad</option>
+                                                    <option value="1">Not Available</option>
+                                                </select>
+                                                <label for="TCTyre10Condition">Tyre 10 Condition</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="TCFrontLeftWheelLife" id="TCFrontLeftWheelLife">
+                                                    <option value="10" selected>10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="30">30</option>
+                                                    <option value="40">40</option>
+                                                    <option value="50">50</option>
+                                                    <option value="60">60</option>
+                                                    <option value="70">70</option>
+                                                    <option value="80">80</option>
+                                                    <option value="90">90</option>
+                                                    <option value="available">Available</option>
                                                     <option value="notAvailable">Not Available</option>
                                                 </select>
-                                                <label for="TCFrontLeftWheel">Front Left Wheel</label>
+                                                <label for="TCFrontLeftWheelLife">Front Left Tyre Life</label>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <select name="TCFrontRightWheel" id="TCFrontRightWheel">
-                                                    <option value="available" selected>Available</option>
+                                                <select name="TCFrontRightWheelLife" id="TCFrontRightWheelLife">
+                                                    <option value="10" selected>10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="30">30</option>
+                                                    <option value="40">40</option>
+                                                    <option value="50">50</option>
+                                                    <option value="60">60</option>
+                                                    <option value="70">70</option>
+                                                    <option value="80">80</option>
+                                                    <option value="90">90</option>
+                                                    <option value="available">Available</option>
                                                     <option value="notAvailable">Not Available</option>
                                                 </select>
-                                                <label for="TCFrontRightWheel">Front Right Wheel</label>
+                                                <label for="TCFrontRightWheelLife">Front Right Tyre Life</label>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <select name="TCRearLeftWheel" id="TCRearLeftWheel">
-                                                    <option value="available" selected>Available</option>
+                                                <select name="TCRearLeftWheelLife" id="TCRearLeftWheelLife">
+                                                    <option value="10" selected>10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="30">30</option>
+                                                    <option value="40">40</option>
+                                                    <option value="50">50</option>
+                                                    <option value="60">60</option>
+                                                    <option value="70">70</option>
+                                                    <option value="80">80</option>
+                                                    <option value="90">90</option>
+                                                    <option value="available">Available</option>
                                                     <option value="notAvailable">Not Available</option>
                                                 </select>
-                                                <label for="TCRearLeftWheel">Rear Left Wheel</label>
+                                                <label for="TCRearLeftWheelLife">Rear Left Tyre Life</label>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <select name="TCRearRightWheel" id="TCRearRightWheel">
-                                                    <option value="available" selected>Available</option>
+                                                <select name="TCRearRightWheelLife" id="TCRearRightWheelLife">
+                                                    <option value="10" selected>10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="30">30</option>
+                                                    <option value="40">40</option>
+                                                    <option value="50">50</option>
+                                                    <option value="60">60</option>
+                                                    <option value="70">70</option>
+                                                    <option value="80">80</option>
+                                                    <option value="90">90</option>
+                                                    <option value="available">Available</option>
                                                     <option value="notAvailable">Not Available</option>
                                                 </select>
-                                                <label for="TCRearRightWheel">Rear Right Wheel</label>
+                                                <label for="TCRearRightWheelLife">Rear Right Tyre Life</label>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <select name="TCSpareWheel" id="TCSpareWheel">
-                                                    <option value="available" selected>Available</option>
+                                                <select name="TCSpareWheelLife" id="TCSpareWheelLife">
+                                                    <option value="10" selected>10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="30">30</option>
+                                                    <option value="40">40</option>
+                                                    <option value="50">50</option>
+                                                    <option value="60">60</option>
+                                                    <option value="70">70</option>
+                                                    <option value="80">80</option>
+                                                    <option value="90">90</option>
+                                                    <option value="available">Available</option>
                                                     <option value="notAvailable">Not Available</option>
                                                 </select>
-                                                <label for="TCSpareWheel">Spare Wheel</label>
+                                                <label for="TCSpareWheelLife">Spare Wheel Life</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="TCTyre5Life" id="TCTyre5Life">
+                                                    <option value="10" selected>10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="30">30</option>
+                                                    <option value="40">40</option>
+                                                    <option value="50">50</option>
+                                                    <option value="60">60</option>
+                                                    <option value="70">70</option>
+                                                    <option value="80">80</option>
+                                                    <option value="90">90</option>
+                                                    <option value="available">Available</option>
+                                                    <option value="notAvailable">Not Available</option>
+                                                </select>
+                                                <label for="TCTyre5Life">Tyre 5 Life</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="TCTyre6Life" id="TCTyre6Life">
+                                                    <option value="10" selected>10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="30">30</option>
+                                                    <option value="40">40</option>
+                                                    <option value="50">50</option>
+                                                    <option value="60">60</option>
+                                                    <option value="70">70</option>
+                                                    <option value="80">80</option>
+                                                    <option value="90">90</option>
+                                                    <option value="available">Available</option>
+                                                    <option value="notAvailable">Not Available</option>
+                                                </select>
+                                                <label for="TCTyre6Life">Tyre 6 Life</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="TCTyre7Life" id="TCTyre7Life">
+                                                    <option value="10" selected>10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="30">30</option>
+                                                    <option value="40">40</option>
+                                                    <option value="50">50</option>
+                                                    <option value="60">60</option>
+                                                    <option value="70">70</option>
+                                                    <option value="80">80</option>
+                                                    <option value="90">90</option>
+                                                    <option value="available">Available</option>
+                                                    <option value="notAvailable">Not Available</option>
+                                                </select>
+                                                <label for="TCTyre7Life">Tyre 7 Life</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="TCTyre8Life" id="TCTyre8Life">
+                                                    <option value="10" selected>10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="30">30</option>
+                                                    <option value="40">40</option>
+                                                    <option value="50">50</option>
+                                                    <option value="60">60</option>
+                                                    <option value="70">70</option>
+                                                    <option value="80">80</option>
+                                                    <option value="90">90</option>
+                                                    <option value="available">Available</option>
+                                                    <option value="notAvailable">Not Available</option>
+                                                </select>
+                                                <label for="TCTyre8Life">Tyre 8 Life</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="TCTyre9Life" id="TCTyre9Life">
+                                                    <option value="10" selected>10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="30">30</option>
+                                                    <option value="40">40</option>
+                                                    <option value="50">50</option>
+                                                    <option value="60">60</option>
+                                                    <option value="70">70</option>
+                                                    <option value="80">80</option>
+                                                    <option value="90">90</option>
+                                                    <option value="available">Available</option>
+                                                    <option value="notAvailable">Not Available</option>
+                                                </select>
+                                                <label for="TCTyre9Life">Tyre 9 Life</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="input-field">
+                                                <select name="TCTyre10Life" id="TCTyre10Life">
+                                                    <option value="10" selected>10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="30">30</option>
+                                                    <option value="40">40</option>
+                                                    <option value="50">50</option>
+                                                    <option value="60">60</option>
+                                                    <option value="70">70</option>
+                                                    <option value="80">80</option>
+                                                    <option value="90">90</option>
+                                                    <option value="available">Available</option>
+                                                    <option value="notAvailable">Not Available</option>
+                                                </select>
+                                                <label for="TCTyre10Life">Tyre 10 Life</label>
                                             </div>
                                         </div>
                                     </div>
@@ -1333,10 +1502,10 @@
                                             <div class="file-field input-field">
                                                 <div class="btn">
                                                     <span>Upload</span>
-                                                    <input type="file" name="carAvatarImage">
+                                                    <input type="file" name="CVAvatarImage">
                                                 </div>
                                                 <div class="file-path-wrapper">
-                                                    <input class="file-path validate" type="text" placeholder="Car Avatar">
+                                                    <input class="file-path validate" type="text" placeholder="CV Avatar">
                                                 </div>
                                             </div>
                                         </div>
@@ -1355,10 +1524,10 @@
                                             <div class="file-field input-field">
                                                 <div class="btn">
                                                     <span>Upload</span>
-                                                    <input type="file" name="carFrontImage">
+                                                    <input type="file" name="CVFrontImage">
                                                 </div>
                                                 <div class="file-path-wrapper">
-                                                    <input class="file-path validate" type="text" placeholder="Car Front">
+                                                    <input class="file-path validate" type="text" placeholder="Vehicle Front View">
                                                 </div>
                                             </div>
                                         </div>
@@ -1366,10 +1535,10 @@
                                             <div class="file-field input-field">
                                                 <div class="btn">
                                                     <span>Upload</span>
-                                                    <input type="file" name="carRightImage">
+                                                    <input type="file" name="CVRightImage">
                                                 </div>
                                                 <div class="file-path-wrapper">
-                                                    <input class="file-path validate" type="text" placeholder="Car Right">
+                                                    <input class="file-path validate" type="text" placeholder="Vehicle Right View">
                                                 </div>
                                             </div>
                                         </div>
@@ -1377,10 +1546,10 @@
                                             <div class="file-field input-field">
                                                 <div class="btn">
                                                     <span>Upload</span>
-                                                    <input type="file" name="carRearImage">
+                                                    <input type="file" name="CVRearImage">
                                                 </div>
                                                 <div class="file-path-wrapper">
-                                                    <input class="file-path validate" type="text" placeholder="Car Rear">
+                                                    <input class="file-path validate" type="text" placeholder="Vehicle Rear View">
                                                 </div>
                                             </div>
                                         </div>
@@ -1388,10 +1557,10 @@
                                             <div class="file-field input-field">
                                                 <div class="btn">
                                                     <span>Upload</span>
-                                                    <input type="file" name="carLeftImage">
+                                                    <input type="file" name="CVLeftImage">
                                                 </div>
                                                 <div class="file-path-wrapper">
-                                                    <input class="file-path validate" type="text" placeholder="Car Left">
+                                                    <input class="file-path validate" type="text" placeholder="Vehicle Left View">
                                                 </div>
                                             </div>
                                         </div>
@@ -1410,10 +1579,10 @@
                                             <div class="file-field input-field">
                                                 <div class="btn">
                                                     <span>Upload</span>
-                                                    <input type="file" name="gearAndSeatImage">
+                                                    <input type="file" name="odometerImage">
                                                 </div>
                                                 <div class="file-path-wrapper">
-                                                    <input class="file-path validate" type="text" placeholder="Gear and Seat">
+                                                    <input class="file-path validate" type="text" placeholder="Odometer">
                                                 </div>
                                             </div>
                                         </div>
@@ -1421,10 +1590,10 @@
                                             <div class="file-field input-field">
                                                 <div class="btn">
                                                     <span>Upload</span>
-                                                    <input type="file" name="odometerImage">
+                                                    <input type="file" name="insideCabinImage">
                                                 </div>
                                                 <div class="file-path-wrapper">
-                                                    <input class="file-path validate" type="text" placeholder="Odometer">
+                                                    <input class="file-path validate" type="text" placeholder="Inside Cabin">
                                                 </div>
                                             </div>
                                         </div>
@@ -1527,6 +1696,72 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="file-field input-field">
+                                                <div class="btn">
+                                                    <span>Upload</span>
+                                                    <input type="file" name="tyre5Image">
+                                                </div>
+                                                <div class="file-path-wrapper">
+                                                    <input class="file-path validate" type="text" placeholder="Tyre 5">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="file-field input-field">
+                                                <div class="btn">
+                                                    <span>Upload</span>
+                                                    <input type="file" name="tyre6Image">
+                                                </div>
+                                                <div class="file-path-wrapper">
+                                                    <input class="file-path validate" type="text" placeholder="Tyre 6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="file-field input-field">
+                                                <div class="btn">
+                                                    <span>Upload</span>
+                                                    <input type="file" name="tyre7Image">
+                                                </div>
+                                                <div class="file-path-wrapper">
+                                                    <input class="file-path validate" type="text" placeholder="Tyre 7">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="file-field input-field">
+                                                <div class="btn">
+                                                    <span>Upload</span>
+                                                    <input type="file" name="tyre8Image">
+                                                </div>
+                                                <div class="file-path-wrapper">
+                                                    <input class="file-path validate" type="text" placeholder="Tyre 8">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="file-field input-field">
+                                                <div class="btn">
+                                                    <span>Upload</span>
+                                                    <input type="file" name="tyre9Image">
+                                                </div>
+                                                <div class="file-path-wrapper">
+                                                    <input class="file-path validate" type="text" placeholder="Tyre 9">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-3">
+                                            <div class="file-field input-field">
+                                                <div class="btn">
+                                                    <span>Upload</span>
+                                                    <input type="file" name="tyre10Image">
+                                                </div>
+                                                <div class="file-path-wrapper">
+                                                    <input class="file-path validate" type="text" placeholder="Tyre 10">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </section>
                             </div>
@@ -1541,11 +1776,12 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PTCmYl" crossorigin="anonymous"></script>
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="./assets/lib/core/materialize.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <script type="text/javascript" src="./assets/lib/plugins/jquery.steps.min.js"></script>
-    <script type="text/javascript" src="./assets/js/entryScript.js"></script>
+    <script type="text/javascript" src="./assets/js/CVEntry.js"></script>
     <script>
         $(document).ready(function() {
             $('.datepicker').datepicker();

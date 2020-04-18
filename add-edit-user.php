@@ -1,3 +1,14 @@
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php scripts/main.php';
+$main = new Main();
+if (!empty($_POST["Submit"])) {
+    $username = $_POST["username"];
+    $pass = $_POST["password"];
+    $mobile = $_POST["mobile"];
+    $usertype = $_POST["usertype"];
+    $registrationResponse = $main->registration($username, $pass, $mobile, $usertype);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,22 +76,35 @@
             <div class="container pt-5">
                 <div class="card">
                     <div class="card-content">
-                        <form id="addUser" name="addUser" action='' method="post" onsubmit="return loginValidation()">
+                        <?php
+                        if (!empty($registrationResponse["status"])) {
+                        ?>
+                            <?php
+                            if ($registrationResponse["status"] == "error") {
+                            ?>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <?php echo $registrationResponse["message"]; ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            <?php
+                            } else if ($registrationResponse["status"] == "success") {
+                            ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $registrationResponse["message"]; ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                        <?php
+                        }
+                        ?>
+                        <form id="addUser" name="addUser" action='' method="post">
                             <div class="row">
-                                <div class="col-12 col-lg-6">
-                                    <div class="input-field">
-                                        <input type="text" class="validate" id="fname" name="fname">
-                                        <label for="fname">First name</label>
-                                        <span class="helper-text" id='addUser_fname_errorloc'></span>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-6">
-                                    <div class="input-field">
-                                        <input type="text" class="validate" id="lname" name="lname">
-                                        <label for="lname">Last name</label>
-                                        <span class="helper-text" id='addUser_lname_errorloc'></span>
-                                    </div>
-                                </div>
                                 <div class="col-12 col-lg-6">
                                     <div class="input-field">
                                         <input type="text" class="validate" id="username" name="username">

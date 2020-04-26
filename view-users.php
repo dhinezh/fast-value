@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
     <link rel="stylesheet/less" type="text/css" href="./assets/styles/styles.less" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
-    <title>View vehicle details | Fast value inspection</title>
+    <title>View user details | Fast value inspection</title>
 </head>
 
 <body class="dashboard">
@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <a href="./dashboard.php" class="menu-option">Dashboard</a>
             </li>
             <li>
-                <a href="#" class="menu-option active">View vehicle details</a>
+                <a href="./view-details.php" class="menu-option">View vehicle details</a>
             </li>
             <?php
             if (isset($usertype) && $usertype == 'admin') {
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($usertype) && $usertype == 'admin') {
             ?>
                 <li>
-                    <a href="./view-users.php" class="menu-option">View users</a>
+                    <a href="./view-users.php" class="menu-option active">View users</a>
                 </li>
             <?php
             }
@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <i class="material-icons">menu</i>
                 </a>
                 <div class="d-flex align-items-center flex-grow-1 justify-content-end justify-content-lg-between">
-                    <h2 class="d-none d-lg-block m-0">View vehicle details</h2>
+                    <h2 class="d-none d-lg-block m-0">View user details</h2>
                     <div class="d-flex align-items-center">
                         <p class="m-0 mr-3">Welcome <?php
                                                     if (isset($username)) {
@@ -108,17 +108,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <table name="tbl-contact" id="tbl-contact" class="display highlight responsive-table" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>Rep ID</th>
-                                    <th>Owner Name</th>
-                                    <th>Vehicle Make</th>
-                                    <th>Vehicle Model</th>
-                                    <th>Vehicle Variant</th>
-                                    <th>Vehicle Registration No</th>
-                                    <th>Valuation Price</th>
-                                    <th>Remarks</th>
-                                    <th>Vehicle Inspection date</th>
-                                    <th>Report created by</th>
-                                    <th>Report created on</th>
+                                    <th>Username</th>
+                                    <th>Mobile</th>
+                                    <th>Usertype</th>
                                 </tr>
                             </thead>
                         </table>
@@ -150,7 +142,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 "pagingType": "numbers",
                 "processing": true,
                 "serverSide": true,
-                "ajax": "php-scripts/viewVehicleDetails.php",
+                "ajax": "php-scripts/viewUserDetails.php",
                 // order: [
                 //     [2, 'asc']
                 // ],

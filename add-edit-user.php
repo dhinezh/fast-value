@@ -1,12 +1,26 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/php scripts/main.php';
+session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php-scripts/main.php';
 $main = new Main();
-if (!empty($_POST["Submit"])) {
+$user = $main->loginCheck();
+if (!$user) {
+    header("location:index.php");
+} else {
+    $username = $_SESSION['user']['username'];
+    $usertype = $_SESSION['user']['usertype'];
+}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $pass = $_POST["password"];
     $mobile = $_POST["mobile"];
     $usertype = $_POST["usertype"];
-    $registrationResponse = $main->registration($username, $pass, $mobile, $usertype);
+    if ($_POST['Submit'] == "Submit") {
+        $registrationResponse = $main->registration($username, $pass, $mobile, $usertype);
+    } else if ($_POST['Submit'] == "Save changes") {
+        $registrationResponse = $main->editUser($username, $pass, $mobile, $usertype);
+    } else if ($_POST['Submit'] == "delete") {
+        $registrationResponse = $main->deleteUser($mobile);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -48,9 +62,24 @@ if (!empty($_POST["Submit"])) {
             <li>
                 <a href="./view-details.php" class="menu-option">View vehicle details</a>
             </li>
-            <li>
-                <a href="#" class="menu-option active">Add/Edit users</a>
-            </li>
+            <?php
+            if (isset($usertype) && $usertype == 'admin') {
+            ?>
+                <li>
+                    <a href="./add-edit-user.php" class="menu-option active">Add/Edit users</a>
+                </li>
+            <?php
+            }
+            ?>
+            <?php
+            if (isset($usertype) && $usertype == 'admin') {
+            ?>
+                <li>
+                    <a href="./view-users.php" class="menu-option">View users</a>
+                </li>
+            <?php
+            }
+            ?>
         </ul>
     </aside>
     <div class="sidenav-overlay"></div>
@@ -63,8 +92,14 @@ if (!empty($_POST["Submit"])) {
                 <div class="d-flex align-items-center flex-grow-1 justify-content-end justify-content-lg-between">
                     <h2 class="d-none d-lg-block m-0">Add/Edit users</h2>
                     <div class="d-flex align-items-center">
-                        <p class="m-0 mr-3">Welcome Saravanan</p>
-                        <a href="./index.html" class="btn-floating btn-medium waves-effect waves-light">
+                        <p class="m-0 mr-3">Welcome <?php
+                                                    if (isset($username)) {
+                                                    ?>
+                                <?php echo $username; ?>
+                            <?php
+                                                    }
+                            ?></p>
+                        <a href="./logout.php" class="btn-floating btn-medium waves-effect waves-light">
                             <i class="material-icons">input</i>
                         </a>
                     </div>
@@ -103,7 +138,7 @@ if (!empty($_POST["Submit"])) {
                         <?php
                         }
                         ?>
-                        <form id="addUser" name="addUser" action='' method="post">
+                        <form id="addUser" name="addUser" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                             <div class="row">
                                 <div class="col-12 col-lg-6">
                                     <div class="input-field">
@@ -144,7 +179,11 @@ if (!empty($_POST["Submit"])) {
                                     </div>
                                 </div>
                             </div>
-                            <button type='submit' name='Submit' class="btn btn-primary mt-3 waves-effect waves-light float-right">Submit</button>
+                            <div class="float-left d-flex">
+                                <button type='submit' name='Submit' value="Save changes" class="btn btn-primary mt-3 waves-effect waves-light float-left">Save changes</button>
+                                <button type='submit' name='Submit' value="delete" class="btn btn-secondary mt-3 waves-effect waves-light float-left ml-3">Delete user</button>
+                            </div>
+                            <button type='submit' name='Submit' value="Submit" class="btn btn-primary mt-3 waves-effect waves-light float-right">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -161,6 +200,10 @@ if (!empty($_POST["Submit"])) {
     <script type="text/javascript" src="./assets/lib/core/materialize.min.js"></script>
     <script>
         $(document).ready(function() {
+            $('#username').val('');
+            $('#password').val('');
+            $('#confpassword').val('');
+            $('#mobile').val('');
             $('select').formSelect();
             var frmvalidator = new Validator("addUser");
             frmvalidator.EnableOnPageErrorDisplay();
@@ -193,6 +236,11 @@ if (!empty($_POST["Submit"])) {
                 return valid;
             });
         });
+    </script>
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
     </script>
 </body>
 

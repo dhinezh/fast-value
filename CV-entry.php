@@ -1,3 +1,21 @@
+<?php
+session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php-scripts/main.php';
+$main = new Main();
+$user = $main->loginCheck();
+if (!$user) {
+    header("location:index.php");
+} else {
+    $username = $_SESSION['user']['username'];
+    $usertype = $_SESSION['user']['usertype'];
+}
+$loading = false;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $loading = true;
+    $registrationResponse = $main->registerCV();
+    $loading = empty($registrationResponse["status"]);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +39,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet/less" type="text/css" href="./assets/styles/styles.less" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
-    <title>Dashboard | Fast value inspection</title>
+    <title>CV Entry | Fast value inspection</title>
 </head>
 
 <body class="dashboard">
@@ -36,9 +54,24 @@
             <li>
                 <a href="./view-details.php" class="menu-option">View vehicle details</a>
             </li>
-            <li>
-                <a href="./add-edit-user.php" class="menu-option">Add/Edit users</a>
-            </li>
+            <?php
+            if (isset($usertype) && $usertype == 'admin') {
+            ?>
+                <li>
+                    <a href="./add-edit-user.php" class="menu-option">Add/Edit users</a>
+                </li>
+            <?php
+            }
+            ?>
+            <?php
+            if (isset($usertype) && $usertype == 'admin') {
+            ?>
+                <li>
+                    <a href="./view-users.php" class="menu-option">View users</a>
+                </li>
+            <?php
+            }
+            ?>
         </ul>
     </aside>
     <div class="sidenav-overlay"></div>
@@ -49,10 +82,16 @@
                     <i class="material-icons">menu</i>
                 </a>
                 <div class="d-flex align-items-center flex-grow-1 justify-content-end justify-content-lg-between">
-                    <h2 class="d-none d-lg-block m-0">Dashboard</h2>
+                    <h2 class="d-none d-lg-block m-0">CV Entry</h2>
                     <div class="d-flex align-items-center">
-                        <p class="m-0 mr-3">Welcome Saravanan</p>
-                        <a href="./index.html" class="btn-floating btn-medium waves-effect waves-light">
+                        <p class="m-0 mr-3">Welcome <?php
+                                                    if (isset($username)) {
+                                                    ?>
+                                <?php echo $username; ?>
+                            <?php
+                                                    }
+                            ?></p>
+                        <a href="./logout.php" class="btn-floating btn-medium waves-effect waves-light">
                             <i class="material-icons">input</i>
                         </a>
                     </div>
@@ -64,6 +103,54 @@
             <div class="container pt-5">
                 <div class="card">
                     <div class="card-content">
+                        <?php
+                        if ($loading) {
+                        ?>
+                            <div class="loading-overlay">
+                                <div class="preloader-wrapper big active">
+                                    <div class="spinner-layer spinner-blue-only">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="gap-patch">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="circle-clipper right">
+                                            <div class="circle"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                        <?php
+                        if (!empty($registrationResponse["status"])) {
+                        ?>
+                            <?php
+                            if ($registrationResponse["status"] == "error") {
+                            ?>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <?php echo $registrationResponse["message"]; ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            <?php
+                            } else if ($registrationResponse["status"] == "success") {
+                            ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $registrationResponse["message"]; ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                        <?php
+                        }
+                        ?>
                         <form id="CV-entry-form" name="CV-entry-form" action='' method="post" enctype="multipart/form-data">
                             <div class="form-register">
                                 <!-- SECTION 1 -->
@@ -80,9 +167,9 @@
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <input type="text" class="datepicker" id="inspectionData" name="inspectionData">
-                                                <label for="inspectionData">Inspection date</label>
-                                                <span class="helper-text" id='CV-entry-form_inspectionData_errorloc'></span>
+                                                <input type="text" class="datepicker" id="inspectionDate" name="inspectionDate">
+                                                <label for="inspectionDate">Inspection date</label>
+                                                <span class="helper-text" id='CV-entry-form_inspectionDate_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
@@ -144,8 +231,8 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="rcType" id="rcType">
-                                                    <option value="available" selected>Available</option>
-                                                    <option value="notAvailable">Not Available</option>
+                                                    <option value="Available" selected>Available</option>
+                                                    <option value="Not Available">Not Available</option>
                                                 </select>
                                                 <label for="rcType">RC Status</label>
                                             </div>
@@ -160,8 +247,8 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="insuranceStatus" id="insuranceStatus">
-                                                    <option value="available" selected>Available</option>
-                                                    <option value="notAvailable">Not Available</option>
+                                                    <option value="Available" selected>Available</option>
+                                                    <option value="Not Available">Not Available</option>
                                                 </select>
                                                 <label for="insuranceStatus">Insurance Status</label>
                                             </div>
@@ -183,11 +270,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="vehicleOwnership" id="vehicleOwnership">
-                                                    <option value="1" selected>1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
+                                                    <option value=1 selected>1</option>
+                                                    <option value=2>2</option>
+                                                    <option value=3>3</option>
+                                                    <option value=4>4</option>
+                                                    <option value=5>5</option>
                                                 </select>
                                                 <label for="vehicleOwnership">Vehicle Ownership</label>
                                             </div>
@@ -195,8 +282,8 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="reportType" id="reportType">
-                                                    <option value="retail" selected>Retail</option>
-                                                    <option value="rpo">RPO</option>
+                                                    <option value="Retail" selected>Retail</option>
+                                                    <option value="RPO">RPO</option>
                                                 </select>
                                                 <label for="reportType">Report Type</label>
                                             </div>
@@ -218,8 +305,8 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="transmissionType" id="transmissionType">
-                                                    <option value="manual" selected>Manual</option>
-                                                    <option value="automatic">Automatic</option>
+                                                    <option value="Manual" selected>Manual</option>
+                                                    <option value="Automatic">Automatic</option>
                                                 </select>
                                                 <label for="transmissionType">Transmission Type</label>
                                             </div>
@@ -227,10 +314,10 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="fuelType" id="fuelType">
-                                                    <option value="diesel" selected>Diesel</option>
-                                                    <option value="petrol">Petrol</option>
-                                                    <option value="lpg">LPG</option>
-                                                    <option value="cng">CNG</option>
+                                                    <option value="Diesel" selected>Diesel</option>
+                                                    <option value="Petrol">Petrol</option>
+                                                    <option value="LPG">LPG</option>
+                                                    <option value="CNG">CNG</option>
                                                 </select>
                                                 <label for="fuelType">Fuel Type</label>
                                             </div>
@@ -245,8 +332,8 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="engineCondition" id="engineCondition">
-                                                    <option value="starts" selected>Starts</option>
-                                                    <option value="doesntstart">Does not start</option>
+                                                    <option value="Starts" selected>Starts</option>
+                                                    <option value="Does not start">Does not start</option>
                                                 </select>
                                                 <label for="engineCondition">Engine Condition</label>
                                             </div>
@@ -254,8 +341,8 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="vehicleCondition" id="vehicleCondition">
-                                                    <option value="running" selected>Running Condition</option>
-                                                    <option value="towing">Towing Condition</option>
+                                                    <option value="Running Condition" selected>Running Condition</option>
+                                                    <option value="Towing Condition">Towing Condition</option>
                                                 </select>
                                                 <label for="vehicleCondition">Vehicle Condition</label>
                                             </div>
@@ -263,8 +350,8 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="structuralCondition" id="structuralCondition">
-                                                    <option value="good" selected>Good</option>
-                                                    <option value="average">Average</option>
+                                                    <option value="Good" selected>Good</option>
+                                                    <option value="Average">Average</option>
                                                 </select>
                                                 <label for="structuralCondition">Structural Condition</label>
                                             </div>
@@ -272,11 +359,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ownerSerial" id="ownerSerial">
-                                                    <option value="1" selected>1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
+                                                    <option value=1 selected>1</option>
+                                                    <option value=2>2</option>
+                                                    <option value=3>3</option>
+                                                    <option value=4>4</option>
+                                                    <option value=5>5</option>
                                                 </select>
                                                 <label for="ownerSerial">Owner Serial</label>
                                             </div>
@@ -284,8 +371,8 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="vehicleKey" id="vehicleKey">
-                                                    <option value="available" selected>Available</option>
-                                                    <option value="notAvailable">Not Available</option>
+                                                    <option value="Available" selected>Available</option>
+                                                    <option value="Not Available">Not Available</option>
                                                 </select>
                                                 <label for="vehicleKey">Vehicle Key</label>
                                             </div>
@@ -293,8 +380,8 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="batteryStatus" id="batteryStatus">
-                                                    <option value="available" selected>Available</option>
-                                                    <option value="notAvailable">Not Available</option>
+                                                    <option value="Available" selected>Available</option>
+                                                    <option value="Not Available">Not Available</option>
                                                 </select>
                                                 <label for="batteryStatus">Battery</label>
                                             </div>
@@ -302,11 +389,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="tyreCondition" id="tyreCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="tyreCondition">Tyre Condition</label>
                                             </div>
@@ -327,7 +414,7 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="input-field">
-                                                <textarea id="remarks" class="materialize-textarea"></textarea>
+                                                <textarea id="remarks" name="remarks" class="materialize-textarea"></textarea>
                                                 <label for="remarks">Remarks</label>
                                             </div>
                                         </div>
@@ -340,9 +427,9 @@
                                     <div class="row button-wrapper">
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
-                                                <input type="text" class="validate" id="ownerName" name="ownerName">
-                                                <label for="ownerName">Owner Name</label>
-                                                <span class="helper-text" id='CV-entry-form_ownerName_errorloc'></span>
+                                                <input type="text" class="validate" id="parivahanOwnerName" name="parivahanOwnerName">
+                                                <label for="parivahanOwnerName">Owner Name</label>
+                                                <span class="helper-text" id='CV-entry-form_parivahanOwnerName_errorloc'></span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
@@ -497,11 +584,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TDEngineCondition" id="TDEngineCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TDEngineCondition">Engine Condition</label>
                                             </div>
@@ -509,11 +596,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TDClutch" id="TDClutch">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TDClutch">Clutch Condition</label>
                                             </div>
@@ -521,11 +608,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TDAccelerator" id="TDAccelerator">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TDAccelerator">Accelerator</label>
                                             </div>
@@ -533,11 +620,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TDGearShiftRatios" id="TDGearShiftRatios">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TDGearShiftRatios">Gear shift ratios</label>
                                             </div>
@@ -545,11 +632,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TDStearing" id="TDStearing">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TDStearing">Stearing Condition</label>
                                             </div>
@@ -557,24 +644,25 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TDBreaking" id="TDBreaking">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TDBreaking">Breaking Condition</label>
                                             </div>
                                         </div>
+                                        <!-- up until here both are same -->
                                         <h2 class="col-12">Cabin Condition</h2>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="CabinFrontBumper" id="CabinFrontBumper">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="CabinFrontBumper">Front Bumper</label>
                                             </div>
@@ -582,11 +670,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="CabinRearBumper" id="CabinRearBumper">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="CabinRearBumper">Rear Bumper</label>
                                             </div>
@@ -594,11 +682,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="CabinRightDoor" id="CabinRightDoor">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="CabinRightDoor">Right Door</label>
                                             </div>
@@ -606,11 +694,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="CabinLeftDoor" id="CabinLeftDoor">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="CabinLeftDoor">Left Door</label>
                                             </div>
@@ -618,11 +706,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="CabinDashboardCondition" id="CabinDashboardCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="CabinDashboardCondition">Dashboard Condition</label>
                                             </div>
@@ -630,11 +718,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="CabinDriverSeat" id="CabinDriverSeat">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="CabinDriverSeat">Driver Seat Condition</label>
                                             </div>
@@ -642,11 +730,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="CabinCoDriverSeat" id="CabinCoDriverSeat">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="CabinCoDriverSeat">Co-Driver Seat Condition</label>
                                             </div>
@@ -654,11 +742,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="CabinThirdRow" id="CabinThirdRow">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="CabinThirdRow">Third Row Seat Condition</label>
                                             </div>
@@ -666,11 +754,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="CabinABS" id="CabinABS">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="CabinABS">ABS Condition</label>
                                             </div>
@@ -678,11 +766,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="CabinRadiator" id="CabinRadiator">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="CabinRadiator">Radiator Condition</label>
                                             </div>
@@ -697,9 +785,9 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="LBType" id="LBType">
-                                                    <option value="companyBody" selected>Company body</option>
-                                                    <option value="normalBody">Normal body</option>
-                                                    <option value="localBody">Local body</option>
+                                                    <option value="Company body" selected>Company body</option>
+                                                    <option value="Normal body">Normal body</option>
+                                                    <option value="Local body">Local body</option>
                                                 </select>
                                                 <label for="LBType">Load body type</label>
                                             </div>
@@ -707,13 +795,13 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="LBBuild" id="LBBuild">
-                                                    <option value="highSideDeck" selected>High side deck</option>
-                                                    <option value="fixedSideDeck">Fixed side deck</option>
-                                                    <option value="dropSideDeck">Drop side deck</option>
-                                                    <option value="halfDeckLoad">Half deck load</option>
-                                                    <option value="flatDeckTrailer">Flat deck trailer</option>
-                                                    <option value="cabinChassisDeck">Cabin chassis deck</option>
-                                                    <option value="fullyBuilt">Fully built</option>
+                                                    <option value="High side deck" selected>High side deck</option>
+                                                    <option value="Fixed side deck">Fixed side deck</option>
+                                                    <option value="Drop side deck">Drop side deck</option>
+                                                    <option value="Half deck load">Half deck load</option>
+                                                    <option value="Flat deck trailer">Flat deck trailer</option>
+                                                    <option value="Cabin chassis deck">Cabin chassis deck</option>
+                                                    <option value="Fully built">Fully built</option>
                                                 </select>
                                                 <label for="LBBuild">Load Body Build</label>
                                             </div>
@@ -721,11 +809,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="LBLeftSideGate" id="LBLeftSideGate">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="LBLeftSideGate">Left Side Gate</label>
                                             </div>
@@ -733,11 +821,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="LBRightSideGate" id="LBRightSideGate">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="LBRightSideGate">Right Side Gate</label>
                                             </div>
@@ -745,11 +833,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="LBLoadFloor" id="LBLoadFloor">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="LBLoadFloor">Load Floor</label>
                                             </div>
@@ -757,11 +845,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="LBOverallLoadBody" id="LBOverallLoadBody">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="LBOverallLoadBody">Overall Load Body</label>
                                             </div>
@@ -769,11 +857,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="LBBodyPaint" id="LBBodyPaint">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="LBBodyPaint">Body Paint</label>
                                             </div>
@@ -781,11 +869,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="LBFuelTank" id="LBFuelTank">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="LBFuelTank">Fuel Tank</label>
                                             </div>
@@ -800,11 +888,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ExCHeadLight" id="ExCHeadLight">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="ExCHeadLight">Head Light</label>
                                             </div>
@@ -812,8 +900,8 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ExCRearTailLight" id="ExCRearTailLight">
-                                                    <option value="working" selected>Working</option>
-                                                    <option value="notWorking">Not Working</option>
+                                                    <option value="Working" selected>Working</option>
+                                                    <option value="Not Working">Not Working</option>
                                                 </select>
                                                 <label for="ExCRearTailLight">Rear Tail Light</label>
                                             </div>
@@ -821,11 +909,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ExCHood" id="ExCHood">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="ExCHood">Hood</label>
                                             </div>
@@ -833,11 +921,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ExCLeftFender" id="ExCLeftFender">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="ExCLeftFender">Left Fender</label>
                                             </div>
@@ -845,11 +933,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ExCRightFender" id="ExCRightFender">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="ExCRightFender">Right Fender</label>
                                             </div>
@@ -857,11 +945,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ExCWindshield" id="ExCWindshield">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="ExCWindshield">Windshield</label>
                                             </div>
@@ -869,11 +957,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ExCChassisCondition" id="ExCChassisCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="ExCChassisCondition">Chassis Condition</label>
                                             </div>
@@ -888,11 +976,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ECEletricalCondition" id="ECEletricalCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="ECEletricalCondition">Electrical Condition</label>
                                             </div>
@@ -900,11 +988,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ECBatteryCondition" id="ECBatteryCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="ECBatteryCondition">Battery Condition</label>
                                             </div>
@@ -912,11 +1000,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ECACCooling" id="ECACCooling">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="ECACCooling">A/C Cooling</label>
                                             </div>
@@ -924,11 +1012,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ECPowerWindow" id="ECPowerWindow">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="ECPowerWindow">Power Window Condition</label>
                                             </div>
@@ -937,23 +1025,23 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ECACRefrigrationUnit" id="ECACRefrigrationUnit">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
-                                                <label for="ECACRefrigrationUnit">Refrigration Unit Fitted In  Load Vehicle</label>
+                                                <label for="ECACRefrigrationUnit">Refrigration Unit Fitted In Load Vehicle</label>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ECACHvacCooling" id="ECACHvacCooling">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="ECACHvacCooling">HVAC Cooling</label>
                                             </div>
@@ -961,11 +1049,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ECACHeaterBlowerFan" id="ECACHeaterBlowerFan">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="ECACHeaterBlowerFan">A/C / Heater / Blower Fan</label>
                                             </div>
@@ -973,11 +1061,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ECElectricCoolingFan" id="ECElectricCoolingFan">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="ECElectricCoolingFan">Electric Cooling Fan</label>
                                             </div>
@@ -985,11 +1073,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="ECCoolingSystemRadiator" id="ECCoolingSystemRadiator">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="ECCoolingSystemRadiator">Cooling System / Radiator</label>
                                             </div>
@@ -1004,8 +1092,8 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="SCSteeringPlay" id="SCSteeringPlay">
-                                                    <option value="yes" selected>Yes</option>
-                                                    <option value="no">No</option>
+                                                    <option value="Yes" selected>Yes</option>
+                                                    <option value="No">No</option>
                                                 </select>
                                                 <label for="SCSteeringPlay">Stearing Play</label>
                                             </div>
@@ -1013,8 +1101,8 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="SCPowerSteering" id="SCPowerSteering">
-                                                    <option value="working" selected>Working</option>
-                                                    <option value="notWorking">Not Working</option>
+                                                    <option value="Working" selected>Working</option>
+                                                    <option value="Not Working">Not Working</option>
                                                 </select>
                                                 <label for="SCPowerSteering">Power Steering</label>
                                             </div>
@@ -1022,8 +1110,8 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="SCStearing" id="SCStearing">
-                                                    <option value="power" selected>Power</option>
-                                                    <option value="manual">Manual</option>
+                                                    <option value="Power" selected>Power</option>
+                                                    <option value="Manual">Manual</option>
                                                 </select>
                                                 <label for="SCStearing">Steering</label>
                                             </div>
@@ -1031,11 +1119,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="SCSteeringCondition" id="SCSteeringCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="SCSteeringCondition">Stearing Conditons</label>
                                             </div>
@@ -1050,11 +1138,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="MCEngineCondition" id="MCEngineCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="MCEngineCondition">Engine Condition</label>
                                             </div>
@@ -1062,8 +1150,8 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="MCEngineRunning" id="MCEngineRunning">
-                                                    <option value="yes" selected>Yes</option>
-                                                    <option value="no">No</option>
+                                                    <option value="Yes" selected>Yes</option>
+                                                    <option value="No">No</option>
                                                 </select>
                                                 <label for="MCEngineRunning">Engine Running</label>
                                             </div>
@@ -1071,11 +1159,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="MCEngineOilLevel" id="MCEngineOilLevel">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="MCEngineOilLevel">Engine Oil Level</label>
                                             </div>
@@ -1083,11 +1171,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="MCEngineOilFunction" id="MCEngineOilFunction">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="MCEngineOilFunction">Engine Oil Functions</label>
                                             </div>
@@ -1102,11 +1190,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TCTransmissionCondition" id="TCTransmissionCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TCTransmissionCondition">Transmission / Gear Box Condition</label>
                                             </div>
@@ -1114,11 +1202,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TCTransmissionWorking" id="TCTransmissionWorking">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TCTransmissionWorking">Transmission Working </label>
                                             </div>
@@ -1126,11 +1214,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TCFrontSuspension" id="TCFrontSuspension">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TCFrontSuspension">Front Suspension</label>
                                             </div>
@@ -1138,11 +1226,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TCRearSuspension" id="TCRearSuspension">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TCRearSuspension">Rear Suspension</label>
                                             </div>
@@ -1164,11 +1252,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TCFrontLeftTyresCondition" id="TCFrontLeftTyresCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TCFrontLeftTyresCondition">Front Left Tyres Condition</label>
                                             </div>
@@ -1176,11 +1264,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TCFrontRightTyresCondition" id="TCFrontRightTyresCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TCFrontRightTyresCondition">Front Right Tyres Condition</label>
                                             </div>
@@ -1188,11 +1276,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TCRearLeftTyresCondition" id="TCRearLeftTyresCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TCRearLeftTyresCondition">Rear Left Tyres Condition</label>
                                             </div>
@@ -1200,11 +1288,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TCRearRightTyresCondition" id="TCRearRightTyresCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TCRearRightTyresCondition">Rear Right Tyres Condition</label>
                                             </div>
@@ -1212,11 +1300,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TCSpareTyresCondition" id="TCSpareTyresCondition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TCSpareTyresCondition">Spare Tyres Condition</label>
                                             </div>
@@ -1224,11 +1312,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TCTyre5Condition" id="TCTyre5Condition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TCTyre5Condition">Tyre 5 Condition</label>
                                             </div>
@@ -1236,11 +1324,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TCTyre6Condition" id="TCTyre6Condition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TCTyre6Condition">Tyre 6 Condition</label>
                                             </div>
@@ -1248,11 +1336,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TCTyre7Condition" id="TCTyre7Condition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TCTyre7Condition">Tyre 7 Condition</label>
                                             </div>
@@ -1260,11 +1348,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TCTyre8Condition" id="TCTyre8Condition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TCTyre8Condition">Tyre 8 Condition</label>
                                             </div>
@@ -1272,11 +1360,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TCTyre9Condition" id="TCTyre9Condition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TCTyre9Condition">Tyre 9 Condition</label>
                                             </div>
@@ -1284,11 +1372,11 @@
                                         <div class="col-12 col-md-6 col-xl-3">
                                             <div class="input-field">
                                                 <select name="TCTyre10Condition" id="TCTyre10Condition">
-                                                    <option value="5" selected>Very Good</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Bad</option>
-                                                    <option value="1">Not Available</option>
+                                                    <option value=5 selected>Very Good</option>
+                                                    <option value=4>Good</option>
+                                                    <option value=3>Average</option>
+                                                    <option value=2>Bad</option>
+                                                    <option value=1>Not Available</option>
                                                 </select>
                                                 <label for="TCTyre10Condition">Tyre 10 Condition</label>
                                             </div>
@@ -1305,8 +1393,8 @@
                                                     <option value="70">70</option>
                                                     <option value="80">80</option>
                                                     <option value="90">90</option>
-                                                    <option value="available">Available</option>
-                                                    <option value="notAvailable">Not Available</option>
+                                                    <option value="Available">Available</option>
+                                                    <option value="Not Available">Not Available</option>
                                                 </select>
                                                 <label for="TCFrontLeftWheelLife">Front Left Tyre Life</label>
                                             </div>
@@ -1323,8 +1411,8 @@
                                                     <option value="70">70</option>
                                                     <option value="80">80</option>
                                                     <option value="90">90</option>
-                                                    <option value="available">Available</option>
-                                                    <option value="notAvailable">Not Available</option>
+                                                    <option value="Available">Available</option>
+                                                    <option value="Not Available">Not Available</option>
                                                 </select>
                                                 <label for="TCFrontRightWheelLife">Front Right Tyre Life</label>
                                             </div>
@@ -1341,8 +1429,8 @@
                                                     <option value="70">70</option>
                                                     <option value="80">80</option>
                                                     <option value="90">90</option>
-                                                    <option value="available">Available</option>
-                                                    <option value="notAvailable">Not Available</option>
+                                                    <option value="Available">Available</option>
+                                                    <option value="Not Available">Not Available</option>
                                                 </select>
                                                 <label for="TCRearLeftWheelLife">Rear Left Tyre Life</label>
                                             </div>
@@ -1359,8 +1447,8 @@
                                                     <option value="70">70</option>
                                                     <option value="80">80</option>
                                                     <option value="90">90</option>
-                                                    <option value="available">Available</option>
-                                                    <option value="notAvailable">Not Available</option>
+                                                    <option value="Available">Available</option>
+                                                    <option value="Not Available">Not Available</option>
                                                 </select>
                                                 <label for="TCRearRightWheelLife">Rear Right Tyre Life</label>
                                             </div>
@@ -1377,8 +1465,8 @@
                                                     <option value="70">70</option>
                                                     <option value="80">80</option>
                                                     <option value="90">90</option>
-                                                    <option value="available">Available</option>
-                                                    <option value="notAvailable">Not Available</option>
+                                                    <option value="Available">Available</option>
+                                                    <option value="Not Available">Not Available</option>
                                                 </select>
                                                 <label for="TCSpareWheelLife">Spare Wheel Life</label>
                                             </div>
@@ -1395,8 +1483,8 @@
                                                     <option value="70">70</option>
                                                     <option value="80">80</option>
                                                     <option value="90">90</option>
-                                                    <option value="available">Available</option>
-                                                    <option value="notAvailable">Not Available</option>
+                                                    <option value="Available">Available</option>
+                                                    <option value="Not Available">Not Available</option>
                                                 </select>
                                                 <label for="TCTyre5Life">Tyre 5 Life</label>
                                             </div>
@@ -1413,8 +1501,8 @@
                                                     <option value="70">70</option>
                                                     <option value="80">80</option>
                                                     <option value="90">90</option>
-                                                    <option value="available">Available</option>
-                                                    <option value="notAvailable">Not Available</option>
+                                                    <option value="Available">Available</option>
+                                                    <option value="Not Available">Not Available</option>
                                                 </select>
                                                 <label for="TCTyre6Life">Tyre 6 Life</label>
                                             </div>
@@ -1431,8 +1519,8 @@
                                                     <option value="70">70</option>
                                                     <option value="80">80</option>
                                                     <option value="90">90</option>
-                                                    <option value="available">Available</option>
-                                                    <option value="notAvailable">Not Available</option>
+                                                    <option value="Available">Available</option>
+                                                    <option value="Not Available">Not Available</option>
                                                 </select>
                                                 <label for="TCTyre7Life">Tyre 7 Life</label>
                                             </div>
@@ -1449,8 +1537,8 @@
                                                     <option value="70">70</option>
                                                     <option value="80">80</option>
                                                     <option value="90">90</option>
-                                                    <option value="available">Available</option>
-                                                    <option value="notAvailable">Not Available</option>
+                                                    <option value="Available">Available</option>
+                                                    <option value="Not Available">Not Available</option>
                                                 </select>
                                                 <label for="TCTyre8Life">Tyre 8 Life</label>
                                             </div>
@@ -1467,8 +1555,8 @@
                                                     <option value="70">70</option>
                                                     <option value="80">80</option>
                                                     <option value="90">90</option>
-                                                    <option value="available">Available</option>
-                                                    <option value="notAvailable">Not Available</option>
+                                                    <option value="Available">Available</option>
+                                                    <option value="Not Available">Not Available</option>
                                                 </select>
                                                 <label for="TCTyre9Life">Tyre 9 Life</label>
                                             </div>
@@ -1485,8 +1573,8 @@
                                                     <option value="70">70</option>
                                                     <option value="80">80</option>
                                                     <option value="90">90</option>
-                                                    <option value="available">Available</option>
-                                                    <option value="notAvailable">Not Available</option>
+                                                    <option value="Available">Available</option>
+                                                    <option value="Not Available">Not Available</option>
                                                 </select>
                                                 <label for="TCTyre10Life">Tyre 10 Life</label>
                                             </div>
@@ -1498,6 +1586,9 @@
                                 <section>
                                     <div class="row button-wrapper">
                                         <h2 class="col-12">Images Upload</h2>
+                                        <p class="col-12">
+                                            Note: The image file size should not exceeed 5 mb. If the size is bigger go to this <a href="https://tinypng.com/">Link</a> to compress the image.
+                                        </p>
                                         <div class="col-12">
                                             <div class="file-field input-field">
                                                 <div class="btn">
@@ -1776,7 +1867,7 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PTCmYl" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="./assets/lib/core/materialize.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
@@ -1794,6 +1885,11 @@
                 e.preventDefault();
             });
         });
+    </script>
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
     </script>
 </body>
 

@@ -19,7 +19,7 @@
  */
  
 // DB table to use
-$table = 'tbl_contact';
+$table = 'registered_users';
  
 // Table's primary key
 $primaryKey = 'id';
@@ -29,24 +29,17 @@ $primaryKey = 'id';
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(
-    array( 'db' => 'first_name', 'dt' => 0 ),
-    array( 'db' => 'last_name',  'dt' => 1 ),
-    array( 'db' => 'address',   'dt' => 2 ),
-    array( 'db' => 'phone', 'dt' => 3,),
-    array( 'db' => 'date_of_birth','dt' => 4,
-        'formatter' => function( $d, $row ) {
-            return date( 'd-m-Y', strtotime($d));
-        }
-    )
-   
+    array( 'db' => 'username', 'dt' => 0 ),
+    array( 'db' => 'mobile',  'dt' => 1 ),
+    array( 'db' => 'usertype',   'dt' => 2 )
 );
  
 // SQL server connection information
 $sql_details = array(
-    'user' => 'root',
-    'pass' => 'test',
-    'db'   => 'blog_samples',
-    'host' => 'localhost'
+    'user' => 'frsiv_25576221',
+    'pass' => 'd1307201dh',
+    'db'   => 'frsiv_25576221_fastvalue',
+    'host' => 'sql212.freesite.vip'
 );
  
  
